@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Add edit Customer Detail">
+      <form [formGroup]="customerDetail" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="p-b-10 p-t-15">Requestor Information</h5>
+            <div class="row p-b-45">
+              <div class="col-md-6">
+                <label>Requestor's Name</label>
+                <input
+                  type="text"
+                  formControlName="ReqName"
+                  class="form-control"
+                  placeholder="Requestor's Name"
+                />
+              </div>
+              <div class="col-md-6">
+                <label>Requestor's Email</label>
+                <input
+                  type="text"
+                  formControlName="ReqEmail"
+                  class="form-control"
+                  placeholder="Requestr's Email"
+                  [ngClass]="{ 'is-invalid': submitted && f.ReqEmail.errors }"
+                />
+                <div
+                  *ngIf="submitted && f.ReqEmail.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.ReqEmail.errors.email">
+                    Email must be a valid email address
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h5 class="p-b-10 p-t-15">Customer Information</h5>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Request Description</label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="Request Description"
+                formControlName="ReqDesc"
+              />
+            </div>
+            <div class="form-group">
+              <label>Customer Request Type</label>
+              <div *ngFor="let item of CustomerType">
+                <input
+                  formControlName="CustomerType"
+                  type="radio"
+                  name="CustomerType"
+                  [value]="item.id"
+                  (change)="onCustomerRequestChange(item.id)"
+                />
+                {{ item.name }}
+                <br />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h5 class="p-b-10 p-t-15">History of Sales(HOS) Detail</h5>
+            <div class="row p-b-45">
+              <div class="col-md-6">
+                <label>Hos Start Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  formControlName="StartDate"
+                  placeholder="Hos Start Date"
+                  [ngClass]="{ 'is-invalid': submitted && f.StartDate.errors }"
+                />
+                <div
+                  *ngIf="submitted && f.StartDate.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.StartDate.errors.required">
+                    Start Date is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label>Hos End Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  formControlName="EndDate"
+                  placeholder="Hos End Date"
+                  [ngClass]="{ 'is-invalid': submitted && f.EndDate.errors }"
+                />
+                <div
+                  *ngIf="submitted && f.EndDate.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.EndDate.errors.required">
+                    End Date is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <dual-list [source]="source" [(destination)]="target"></dual-list>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="form-group text-right">
+            <button
+              type="button"
+              (click)="onReset()"
+              class="btn btn-outline-info btn-raised m-r-5"
+            >
+              Reset
+            </button>
+            <button type="submit" class="btn btn-primary btn-raised">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>
+<ng2-toasty position="bottom-right"></ng2-toasty>
