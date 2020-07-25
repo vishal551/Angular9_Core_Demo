@@ -5,6 +5,13 @@ import { AuthComponent } from "./theme/layout/auth/auth.component";
 
 const routes: Routes = [
   {
+    path: "login",
+    loadChildren: () =>
+      import("./component/login/login.module").then(
+        (module) => module.LoginModule
+      ),
+  },
+  {
     path: "",
     component: AdminComponent,
     children: [
@@ -47,6 +54,11 @@ const routes: Routes = [
       import(
         "./component/customer-detail/add-edit-customer-detail/add-edit-customer-detail.module"
       ).then((m) => m.AddEditCustomerDetailModule),
+  },
+  {
+    path: "login",
+    loadChildren: () =>
+      import("./component/login/login.module").then((m) => m.LoginModule),
   },
 ];
 
